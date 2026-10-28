@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CivicTrack | Community Issue Tracker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark">C</span><span>CivicTrack<small>Community Issue Tracker</small></span></a>
+    <nav><a href="#report">Report issue</a><a href="#issues">Explore issues</a><button id="logoutBtn" class="btn btn-ghost hidden">Log out</button></nav>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero-copy"><span class="eyebrow">YOUR COMMUNITY, BETTER</span>
+        <h1>See a problem?<br><em>Help solve it.</em></h1>
+        <p>Report local problems, follow their progress, and help your community become a better place to live.</p>
+        <a class="btn btn-primary" href="#report">Report a community issue <span>↗</span></a>
+        <div class="hero-note"><span class="live-dot"></span> Every report helps make a difference</div>
+      </div>
+      <div class="hero-art" aria-label="Illustration of a clean, connected community">
+        <div class="sun"></div><div class="cloud cloud-one"></div><div class="cloud cloud-two"></div>
+        <div class="hill hill-back"></div><div class="hill hill-front"></div>
+        <div class="building building-a"><i></i><i></i><i></i></div><div class="building building-b"><i></i><i></i><i></i><i></i></div>
+        <div class="road"></div><div class="tree tree-a"><b></b><i></i></div><div class="tree tree-b"><b></b><i></i></div>
+        <div class="pin"><span>✓</span></div><div class="art-label">Local action, real change</div>
+      </div>
+    </section>
+    <section class="stats" aria-label="Issue statistics">
+      <div><span class="stat-icon">◎</span><div><strong id="totalStat">—</strong><small>Total reports</small></div></div>
+      <div><span class="stat-icon amber">◷</span><div><strong id="pendingStat">—</strong><small>Open issues</small></div></div>
+      <div><span class="stat-icon green">✓</span><div><strong id="resolvedStat">—</strong><small>Resolved issues</small></div></div>
+    </section>
+    <section class="content-grid">
+      <section class="panel report-panel" id="report">
+        <div class="section-heading"><div><span class="eyebrow">TAKE ACTION</span><h2>Report an issue</h2></div><span class="heading-icon">＋</span></div>
+        <p class="muted">Tell us what needs attention in your neighbourhood.</p>
+        <form id="reportForm">
+          <label for="title">Issue title</label><input id="title" name="title" maxlength="120" placeholder="e.g. Streetlight not working" required>
+          <div class="two-cols"><div><label for="category">Category</label><select id="category" name="category" required><option value="">Choose category</option><option>Roads & Potholes</option><option>Waste & Sanitation</option><option>Water Supply</option><option>Streetlights</option><option>Public Safety</option><option>Parks & Public Spaces</option><option>Other</option></select></div>
+          <div><label for="priority">Priority</label><select id="priority" name="priority"><option value="medium">Medium</option><option value="low">Low</option><option value="high">High</option></select></div></div>
+          <label for="location">Location / landmark</label><input id="location" name="location" maxlength="180" placeholder="Street, area or nearby landmark" required>
+          <label for="description">Description</label><textarea id="description" name="description" maxlength="2000" rows="4" placeholder="Describe the problem and where it occurs..." required></textarea>
+          <button class="btn btn-primary full-width" type="submit">Submit report <span>→</span></button>
+          <p class="form-foot">Sign in or create an account to submit and track reports.</p>
+        </form>
+      </section>
+      <section class="panel issues-panel" id="issues">
+        <div class="section-heading"><div><span class="eyebrow">COMMUNITY BOARD</span><h2>Recent reports</h2></div><button id="refreshBtn" class="icon-btn" title="Refresh reports" aria-label="Refresh reports">↻</button></div>
+        <div class="filters"><input id="searchInput" placeholder="Search title or location…" aria-label="Search issues"><select id="statusFilter" aria-label="Filter by status"><option value="">All statuses</option><option value="reported">Reported</option><option value="in_progress">In progress</option><option value="resolved">Resolved</option><option value="rejected">Rejected</option></select></div>
+        <div id="message" class="message hidden" role="status"></div>
+        <div id="issuesList" class="issues-list"><div class="empty-state">Loading community reports…</div></div>
+      </section>
+    </section>
+    <section class="how-it-works">
+      <div><span class="eyebrow">SIMPLE PROCESS</span><h2>Small steps. Stronger communities.</h2></div>
+      <div class="steps"><article><span>01</span><h3>Report it</h3><p>Share the issue, category, and location.</p></article><article><span>02</span><h3>Track progress</h3><p>Check status updates as the issue is reviewed.</p></article><article><span>03</span><h3>See resolution</h3><p>Follow the report until it is resolved.</p></article></div>
+    </section>
+  </main>
+  <footer><span>© 2026 CivicTrack</span><span>Built for a more responsive community.</span></footer>
+  <dialog id="authDialog">
+    <form method="dialog" class="dialog-close"><button aria-label="Close">×</button></form>
+    <span class="eyebrow">WELCOME TO CIVICTRACK</span><h2 id="authHeading">Sign in to continue</h2>
+    <p class="muted">Create an account or sign in to submit and manage your reports.</p>
+    <form id="authForm">
+      <label for="email">Email address</label><input id="email" type="email" autocomplete="email" required>
+      <label for="password">Password</label><input id="password" type="password" minlength="8" autocomplete="current-password" required>
+      <button class="btn btn-primary full-width" id="authSubmit" type="submit">Sign in</button>
+    </form>
+    <p class="switch-auth"><span id="switchPrompt">New here?</span> <button id="switchAuth" class="text-btn" type="button">Create account</button></p>
+    <p id="authMessage" class="message hidden" role="status"></p>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
